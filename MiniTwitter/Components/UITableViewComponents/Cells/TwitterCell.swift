@@ -69,6 +69,9 @@ class TwitterCell: Cell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 1
+        contentView.layer.backgroundColor = UIColor.cyan.cgColor.copy(alpha: 0.1)
         [nameLabel, dateLabel, tweetLabel, profileImage].forEach { contentView.addSubview($0) }
         NSLayoutConstraint.activate(tweetConstraints)
         NSLayoutConstraint.activate(tweetLabelPortraitOptionalConstraints)
@@ -90,7 +93,8 @@ class TwitterCell: Cell {
         }
     }
 
-    required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

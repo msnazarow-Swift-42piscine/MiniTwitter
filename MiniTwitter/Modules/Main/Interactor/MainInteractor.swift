@@ -3,7 +3,7 @@
 //  MiniTwitter
 //
 //  Created by out-nazarov2-ms on 24.09.2021.
-//  
+//
 //
 
 import Foundation
@@ -20,11 +20,11 @@ class MainInteractor: PresenterToInteractorMainProtocol {
     }
 
     func getRecentTweets(with substring: String, number: Int) {
-        apiTwitterService.getRecentTweets(with: substring, number: number) {[weak self] result in
+        apiTwitterService.getRecentTweets(with: substring, number: number) { [weak self] result in
             switch result {
-            case .success(let tweets):
+            case let .success(tweets):
                 self?.presenter.didDownloadTweets(tweets)
-            case .failure(let error):
+            case let .failure(error):
                 self?.presenter.didCatchError(error)
             }
         }

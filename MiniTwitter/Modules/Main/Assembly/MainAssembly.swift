@@ -3,13 +3,14 @@
 //  MiniTwitter
 //
 //  Created by out-nazarov2-ms on 24.09.2021.
-//  
+//
 //
 
 import UIKit
 
 enum MainAssembly {
     // MARK: Static methods
+
     static func createModule() -> UIViewController {
         let viewController = MainViewController()
         let router = MainRouter(view: viewController)

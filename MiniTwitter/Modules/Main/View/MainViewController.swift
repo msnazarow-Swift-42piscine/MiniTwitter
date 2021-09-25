@@ -3,24 +3,26 @@
 //  MiniTwitter
 //
 //  Created by out-nazarov2-ms on 24.09.2021.
-//  
+//
 //
 
 import UIKit
 
 class MainViewController: UITableViewController {
     // MARK: - Properties
+
     var presenter: ViewToPresenterMainProtocol?
 
-    lazy var searchTextField: UITextField = {
-        let textField = UITextField()
+    lazy var searchTextField: SearchTextField = {
+        let textField = SearchTextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.textAlignment = .center
         textField.addTarget(self, action: #selector(didTapReturn), for: .editingDidEndOnExit)
+        textField.backgroundColor = .purple.withAlphaComponent(0.1)
         return textField
     }()
 
     // MARK: - Lifecycle Methods
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -35,14 +37,16 @@ class MainViewController: UITableViewController {
         tableView.allowsSelection = false
         tableView.register(TwitterCell.self, forCellReuseIdentifier: String(describing: TwitterCell.self))
         title = "Tweets"
-        tableView.tableHeaderView = searchTextField
-        searchTextField.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
     }
 
     private func addSubviews() {
+        tableView.tableHeaderView = searchTextField
     }
 
     private func setupConstraints() {
+        searchTextField.centerXAnchor.constraint(equalTo: tableView.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        searchTextField.widthAnchor.constraint(equalTo: tableView.safeAreaLayoutGuide.widthAnchor).isActive = true
+        searchTextField.heightAnchor.constraint(equalToConstant: 50 * verticalTranslation).isActive = true
     }
 
     @objc private func didTapReturn(_ sender: UITextField) {

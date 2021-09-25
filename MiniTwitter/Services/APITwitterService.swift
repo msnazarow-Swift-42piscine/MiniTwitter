@@ -18,6 +18,7 @@ class APITwitterService: APITwitterServiceProtocol {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
+
     func getRecentTweets(with substring: String, number: Int, complition: @escaping (Result<[TweetResponse], Error>) -> Void) {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"

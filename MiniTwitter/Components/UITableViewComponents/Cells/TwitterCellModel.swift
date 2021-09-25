@@ -3,7 +3,7 @@
 //  MiniTwitter
 //
 //  Created by out-nazarov2-ms on 24.09.2021.
-//  
+//
 //
 
 import Foundation
@@ -27,6 +27,6 @@ struct TwitterCellModel: CellIdentifiable {
         guard let date = DateFormatter.twitterDateFormatter.date(from: dateString) else { return }
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .abbreviated
-        self.dateString = formatter.localizedString(for: date, relativeTo: Date())
+        dateString = formatter.localizedString(for: date, relativeTo: Date())
     }
 }

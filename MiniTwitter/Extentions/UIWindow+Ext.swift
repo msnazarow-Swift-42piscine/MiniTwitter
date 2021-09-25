@@ -3,7 +3,7 @@
 //  MiniTwitter
 //
 //  Created by out-nazarov2-ms on 24.09.2021.
-//  
+//
 //
 
 import UIKit

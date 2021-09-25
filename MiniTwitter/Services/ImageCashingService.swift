@@ -26,7 +26,7 @@ class ImageCashingService: ImageCashingServiceProtocol {
                     return
                 }
             }
-            URLSession.shared.dataTask(with: url!) {[self] data, _, _ in
+            URLSession.shared.dataTask(with: url!) { [self] data, _, _ in
                 guard let data = data else {
                     return
                 }
@@ -37,6 +37,7 @@ class ImageCashingService: ImageCashingServiceProtocol {
             }.resume()
         }
     }
+
     func saveImage(for url: String, image: UIImage) {
         images[url] = image
     }

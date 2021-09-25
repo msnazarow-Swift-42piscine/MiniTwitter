@@ -3,7 +3,7 @@
 //  MiniTwitter
 //
 //  Created by out-nazarov2-ms on 24.09.2021.
-//  
+//
 //
 
 import Foundation
@@ -11,12 +11,14 @@ import UIKit
 
 class MainPresenter: ViewToPresenterMainProtocol {
     // MARK: Properties
+
     weak var view: PresenterToViewMainProtocol?
     let interactor: PresenterToInteractorMainProtocol?
     let router: PresenterToRouterMainProtocol?
     let dataSource: PresenterToDataSourceMainProtocol?
 
     // MARK: Init
+
     init(view: PresenterToViewMainProtocol,
          interactor: PresenterToInteractorMainProtocol?,
          router: PresenterToRouterMainProtocol?,
