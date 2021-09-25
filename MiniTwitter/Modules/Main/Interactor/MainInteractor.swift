@@ -14,14 +14,14 @@ class MainInteractor: PresenterToInteractorMainProtocol {
 
     let apiTwitterService: APITwitterServiceProtocol
     let imageCashingService: ImageCashingServiceProtocol
-    init(apiTwitterService: APITwitterServiceProtocol, imageCashingService: ImageCashingServiceProtocol){
+    init(apiTwitterService: APITwitterServiceProtocol, imageCashingService: ImageCashingServiceProtocol) {
         self.apiTwitterService = apiTwitterService
         self.imageCashingService = imageCashingService
     }
 
-    func getRecentTweets(with substring: String, number: Int){
+    func getRecentTweets(with substring: String, number: Int) {
         apiTwitterService.getRecentTweets(with: substring, number: number) {[weak self] result in
-            switch result{
+            switch result {
             case .success(let tweets):
                 self?.presenter.didDownloadTweets(tweets)
             case .failure(let error):

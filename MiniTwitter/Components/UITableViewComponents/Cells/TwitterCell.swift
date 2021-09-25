@@ -42,7 +42,7 @@ class TwitterCell: Cell {
     }()
 
     lazy var tweetLabelPortraitOptionalConstraints = [
-        profileImage.trailingAnchor.constraint(equalTo: tweetLabel.leadingAnchor, constant: -gap),
+        profileImage.trailingAnchor.constraint(equalTo: tweetLabel.leadingAnchor, constant: -gap)
     ]
 
     lazy var tweetLabelLandscapeOptionalConstraints = [
@@ -69,7 +69,7 @@ class TwitterCell: Cell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        [nameLabel, dateLabel, tweetLabel, profileImage].forEach{ contentView.addSubview($0)}
+        [nameLabel, dateLabel, tweetLabel, profileImage].forEach { contentView.addSubview($0) }
         NSLayoutConstraint.activate(tweetConstraints)
         NSLayoutConstraint.activate(tweetLabelPortraitOptionalConstraints)
     }
@@ -81,7 +81,7 @@ class TwitterCell: Cell {
         nameLabel.attributedText = fullName
         dateLabel.text = model.dateString
         tweetLabel.text = model.tweet
-        presenter?.getImage(for: model.profileImage){ image in
+        presenter?.getImage(for: model.profileImage) { image in
             DispatchQueue.main.async {
                 self.profileImage.image = image
                 self.profileImage.layer.cornerRadius = 0.5 * self.profileImage.layer.bounds.width
@@ -93,8 +93,6 @@ class TwitterCell: Cell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
-
 
 //  TODO: Lanscape layout

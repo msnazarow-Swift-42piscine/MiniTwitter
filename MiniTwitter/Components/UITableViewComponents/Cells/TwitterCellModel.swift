@@ -9,7 +9,6 @@
 import Foundation
 
 struct TwitterCellModel: CellIdentifiable {
-
     var cellIdentifier: String { return "TwitterCell" }
 
     let fullName: String

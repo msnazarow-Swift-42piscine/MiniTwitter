@@ -20,7 +20,7 @@ class ImageCashingService: ImageCashingServiceProtocol {
             comlition(image)
         } else {
             var url = URL(string: urlString.replacingOccurrences(of: "_normal", with: ""))
-            if url == nil{
+            if url == nil {
                 url = URL(string: urlString)
                 if url == nil {
                     return
@@ -40,5 +40,4 @@ class ImageCashingService: ImageCashingServiceProtocol {
     func saveImage(for url: String, image: UIImage) {
         images[url] = image
     }
-
 }

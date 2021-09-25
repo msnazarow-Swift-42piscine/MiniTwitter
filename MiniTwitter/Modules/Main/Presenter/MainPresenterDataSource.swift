@@ -9,7 +9,6 @@
 import UIKit
 
 class MainPresenterDataSource: NSObject, PresenterToDataSourceMainProtocol {
-
     // MARK: Properties
     weak var presenter: CellToPresenterMainProtocol?
 
@@ -26,7 +25,7 @@ class MainPresenterDataSource: NSObject, PresenterToDataSourceMainProtocol {
     func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].rows.count
     }
-//    orien
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let model = sections[indexPath.section].rows[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: model.cellIdentifier, for: indexPath) as? Cell else {

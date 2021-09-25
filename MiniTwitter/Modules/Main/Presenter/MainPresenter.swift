@@ -10,12 +10,11 @@ import Foundation
 import UIKit
 
 class MainPresenter: ViewToPresenterMainProtocol {
-
     // MARK: Properties
     weak var view: PresenterToViewMainProtocol?
     let interactor: PresenterToInteractorMainProtocol?
     let router: PresenterToRouterMainProtocol?
-    let dataSource:PresenterToDataSourceMainProtocol?
+    let dataSource: PresenterToDataSourceMainProtocol?
 
     // MARK: Init
     init(view: PresenterToViewMainProtocol,
@@ -28,7 +27,7 @@ class MainPresenter: ViewToPresenterMainProtocol {
         self.dataSource = dataSource
     }
 
-    func viewDidLoad(){
+    func viewDidLoad() {
         guard let view = view, let interactor = interactor else {
             return
         }
@@ -48,12 +47,11 @@ class MainPresenter: ViewToPresenterMainProtocol {
 
 extension MainPresenter: CellToPresenterMainProtocol {
     func getImage(for imageURL: String, complition: @escaping (UIImage?) -> Void) {
-        interactor?.getImage(for: imageURL){ image in
+        interactor?.getImage(for: imageURL) { image in
             complition(image)
         }
     }
 }
-
 
 extension MainPresenter: InteractortoPresenterMainProtocol {
     func didDownloadTweets(_ tweets: [TweetResponse]) {
@@ -61,26 +59,23 @@ extension MainPresenter: InteractortoPresenterMainProtocol {
             dataSource?.updateForSections([SectionModel(tweets)])
             view?.reloadTableViewData()
         } else {
-            print(TwitterError.NoResultFinding.localizedDescription)
+            view?.showAlert(with: TwitterError.noResultFinding.localizedDescription)
         }
     }
 
     func didCatchError(_ error: Error) {
-        do{
+        do {
             throw error
         } catch let DecodingError.dataCorrupted(context) {
-          print("data corrupted:", context)
+            view?.showAlert(with: "data corrupted: \(context)")
         } catch let DecodingError.keyNotFound(key, context) {
-          print("Key '\(key)' not found:", context.debugDescription)
-          print("codingPath:", context.codingPath)
+            view?.showAlert(with: "Key '\(key)' not found: \(context.debugDescription)\ncodingPath: \(context.codingPath)")
         } catch let DecodingError.valueNotFound(value, context) {
-          print("Value '\(value)' not found:", context.debugDescription)
-          print("codingPath:", context.codingPath)
+            view?.showAlert(with: "Value '\(value)' not found: \(context.debugDescription)\ncodingPath: \(context.codingPath)")
         } catch let DecodingError.typeMismatch(type, context) {
-          print("Type '\(type)' mismatch:", context.debugDescription)
-          print("codingPath:", context.codingPath)
+            view?.showAlert(with: "Type '\(type)' mismatch: \(context.debugDescription)\ncodingPath: \(context.codingPath)")
         } catch {
-          print(error.localizedDescription)
+            view?.showAlert(with: error.localizedDescription)
         }
     }
 }

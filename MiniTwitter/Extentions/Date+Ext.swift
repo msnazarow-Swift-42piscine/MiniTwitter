@@ -49,7 +49,7 @@ extension Date {
         formatter.locale = Locale(identifier: "ru_RU")
         return formatter.string(from: self)
     }
-    
+
     var dateSlashString: String {
         DateFormatter.YYYYMMdd.string(from: self)
     }

@@ -9,7 +9,6 @@
 import UIKit
 
 class MainViewController: UITableViewController {
-
     // MARK: - Properties
     var presenter: ViewToPresenterMainProtocol?
 
@@ -41,11 +40,9 @@ class MainViewController: UITableViewController {
     }
 
     private func addSubviews() {
-
     }
 
     private func setupConstraints() {
-
     }
 
     @objc private func didTapReturn(_ sender: UITextField) {
@@ -53,7 +50,7 @@ class MainViewController: UITableViewController {
     }
 }
 
-extension MainViewController: PresenterToViewMainProtocol{
+extension MainViewController: PresenterToViewMainProtocol {
     func getSearchString() -> String {
         return searchTextField.text ?? ""
     }
@@ -67,6 +64,12 @@ extension MainViewController: PresenterToViewMainProtocol{
             self?.tableView.reloadData()
         }
     }
+
+    func showAlert(with message: String) {
+        DispatchQueue.main.async { [self] in
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    }
 }
-
-

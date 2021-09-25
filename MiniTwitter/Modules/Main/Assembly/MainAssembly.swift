@@ -8,11 +8,9 @@
 
 import UIKit
 
-enum MainAssembly{
-    
+enum MainAssembly {
     // MARK: Static methods
     static func createModule() -> UIViewController {
-
         let viewController = MainViewController()
         let router = MainRouter(view: viewController)
         let apiTwitterService = APITwitterService()

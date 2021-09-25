@@ -7,23 +7,18 @@
 
 import Foundation
 
-let API_KEY = "F2OuE6PdVN0lGUS1xrvLxrNYK"
-let API_SECRET_KEY = "RUDxXB5XtziUR5p5vPG5bis0hOYbmuoQspsEgnpAPZfpuEopVs"
-let BEARER = ((API_KEY + ":" + API_SECRET_KEY).data(using: String.Encoding.utf8))!.base64EncodedString()
-let bearer = "RjJPdUU2UGRWTjBsR1VTMXhydkx4ck5ZSzpSVUR4WEI1WHR6aVVSNXA1dlBHNWJpczBoT1libXVvUXNwc0VnbnBBUFpmcHVFb3BWcw=="
-
 protocol APITwitterServiceProtocol: AnyObject {
-    func getRecentTweets(with substring: String, number: Int, complition: @escaping (Result<[TweetResponse], Error>) ->Void)
+    func getRecentTweets(with substring: String, number: Int, complition: @escaping (Result<[TweetResponse], Error>) -> Void)
 }
 
 class APITwitterService: APITwitterServiceProtocol {
-    let access_token = "AAAAAAAAAAAAAAAAAAAAAO3k9gAAAAAAYiCjT11ullplhI%2FwD7DfpQCK2B0%3De7YvgUGT6pCgqAFbq0qqyKvWxlIwgqsjGV6WVTBzrTJpzTYGTk"
+    let accessToken = "AAAAAAAAAAAAAAAAAAAAAO3k9gAAAAAAYiCjT11ullplhI%2FwD7DfpQCK2B0%3De7YvgUGT6pCgqAFbq0qqyKvWxlIwgqsjGV6WVTBzrTJpzTYGTk"
     let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
-    func getRecentTweets(with substring: String, number: Int, complition: @escaping (Result<[TweetResponse], Error>) ->Void){
+    func getRecentTweets(with substring: String, number: Int, complition: @escaping (Result<[TweetResponse], Error>) -> Void) {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.twitter.com"
@@ -37,14 +32,21 @@ class APITwitterService: APITwitterServiceProtocol {
             .init(name: "display_text_range", value: "-1")
         ]
         var request = URLRequest(url: urlComponents.url!)
-        request.setValue("Bearer \(access_token)", forHTTPHeaderField: "Authorization")
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let data = data, error == nil else { return }
+            if let error = error {
+                complition(.failure(error))
+                return
+            }
+            guard let data = data else {
+                complition(.failure(TwitterError.noDataProduced))
+                return
+            }
             do {
                 if let tweets = (try self.decoder.decode(SearchResponse.self, from: data)).statuses {
                     complition(.success(tweets))
                 } else {
-                    complition(.failure(TwitterError.NoResultFinding))
+                    complition(.failure(TwitterError.noResultFinding))
                 }
             } catch {
                 complition(.failure(error))

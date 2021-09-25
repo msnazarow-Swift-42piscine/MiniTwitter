@@ -9,7 +9,6 @@
 import UIKit
 
 class MainRouter: PresenterToRouterMainProtocol {
-
     // MARK: - Properties
     weak var view: UIViewController?
 
@@ -17,5 +16,4 @@ class MainRouter: PresenterToRouterMainProtocol {
     init(view: UIViewController) {
         self.view = view
     }
-    
 }

@@ -7,6 +7,16 @@
 
 import Foundation
 
-enum TwitterError: Error{
-    case NoResultFinding
+enum TwitterError: LocalizedError {
+    case noResultFinding
+    case noDataProduced
+
+    var localizedDescription: String {
+        switch self {
+        case .noDataProduced:
+            return "Ошибка обращения к API twitter"
+        case .noResultFinding:
+            return "Результатов не найдено, попробуйте изменить запрос"
+        }
+    }
 }
