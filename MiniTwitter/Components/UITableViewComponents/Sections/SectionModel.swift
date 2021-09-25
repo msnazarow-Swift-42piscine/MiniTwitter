@@ -13,7 +13,7 @@ final class SectionModel: SectionRowsRepresentable {
 
     init(_ properties: [TweetResponse]) {
         properties.forEach { property in
-            rows.append(CellModel(property))
+            rows.append(TwitterCellModel(property))
         }
     }
 }

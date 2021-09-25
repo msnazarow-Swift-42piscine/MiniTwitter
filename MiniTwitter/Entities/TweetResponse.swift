@@ -10,6 +10,6 @@ import Foundation
 struct TweetResponse: Codable {
     let createdAt: String?
     let fullText: String?
-    let name: UserResponse?
+    let user: UserResponse?
     let retweetedStatus: RetweetedStatusResponse?
 }

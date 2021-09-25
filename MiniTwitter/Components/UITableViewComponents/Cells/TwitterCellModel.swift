@@ -8,26 +8,23 @@
 
 import Foundation
 
-struct Model {
+struct TwitterCellModel: CellIdentifiable {
 
-}
-
-struct CellModel: CellIdentifiable {
-
-    var cellIdentifier: String { return "Cell" }
+    var cellIdentifier: String { return "TwitterCell" }
 
     let fullName: String
     let nickName: String
     var dateString: String
     let tweet: String
     let profileImage: String
-//https://twitter.com/EvgenyFeldman
+
     init(_ property: TweetResponse) {
-        fullName = property.name?.name ?? ""
-        nickName = property.name?.screenName ?? ""
+        fullName = property.user?.name ?? ""
+        nickName = property.user?.screenName ?? ""
         dateString = property.createdAt ?? ""
-        tweet = property.fullText ?? ""
-        profileImage = property.name?.profileImageUrlHttps ?? ""
+
+        tweet = property.retweetedStatus?.fullText ?? property.fullText ?? ""
+        profileImage = property.user?.profileImageUrlHttps ?? ""
         guard let date = DateFormatter.twitterDateFormatter.date(from: dateString) else { return }
         let formatter = RelativeDateTimeFormatter()
         formatter.unitsStyle = .abbreviated

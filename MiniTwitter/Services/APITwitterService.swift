@@ -30,9 +30,9 @@ class APITwitterService: APITwitterServiceProtocol {
         urlComponents.path = "/1.1/search/tweets.json"
         urlComponents.queryItems = [
             .init(name: "q", value: substring),
-            .init(name: "lang", value: "en"),
+            .init(name: "lang", value: "ru"),
             .init(name: "result_type", value: "recent"),
-            .init(name: "count", value: "100"),
+            .init(name: "count", value: "\(number)"),
             .init(name: "tweet_mode", value: "extended"),
             .init(name: "display_text_range", value: "-1")
         ]

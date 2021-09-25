@@ -7,14 +7,16 @@
 //
 
 import Foundation
+import UIKit
 
 class MainInteractor: PresenterToInteractorMainProtocol {
     weak var presenter: InteractortoPresenterMainProtocol!
 
     let apiTwitterService: APITwitterServiceProtocol
-
-    init(apiTwitterService: APITwitterServiceProtocol){
+    let imageCashingService: ImageCashingServiceProtocol
+    init(apiTwitterService: APITwitterServiceProtocol, imageCashingService: ImageCashingServiceProtocol){
         self.apiTwitterService = apiTwitterService
+        self.imageCashingService = imageCashingService
     }
 
     func getRecentTweets(with substring: String, number: Int){
@@ -25,6 +27,12 @@ class MainInteractor: PresenterToInteractorMainProtocol {
             case .failure(let error):
                 self?.presenter.didCatchError(error)
             }
+        }
+    }
+
+    func getImage(for url: String, comlition: @escaping (UIImage?) -> Void) {
+        imageCashingService.getImage(for: url) { image in
+            comlition(image)
         }
     }
 }

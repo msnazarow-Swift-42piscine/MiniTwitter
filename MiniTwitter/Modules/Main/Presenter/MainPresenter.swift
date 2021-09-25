@@ -29,20 +29,40 @@ class MainPresenter: ViewToPresenterMainProtocol {
     }
 
     func viewDidLoad(){
+        guard let view = view, let interactor = interactor else {
+            return
+        }
+        view.setSearchString(with: "\"Школа 21\"")
+        let searchText = view.getSearchString()
+        if !searchText.isEmpty {
+            interactor.getRecentTweets(with: searchText, number: 100)
+        }
+    }
 
+    func didTapReturn(from searchText: String) {
+        if !searchText.isEmpty {
+            interactor?.getRecentTweets(with: searchText, number: 100)
+        }
     }
 }
 
 extension MainPresenter: CellToPresenterMainProtocol {
     func getImage(for imageURL: String, complition: @escaping (UIImage?) -> Void) {
-
+        interactor?.getImage(for: imageURL){ image in
+            complition(image)
+        }
     }
 }
 
 
 extension MainPresenter: InteractortoPresenterMainProtocol {
     func didDownloadTweets(_ tweets: [TweetResponse]) {
-//        dataSource.
+        if !tweets.isEmpty {
+            dataSource?.updateForSections([SectionModel(tweets)])
+            view?.reloadTableViewData()
+        } else {
+            print(TwitterError.NoResultFinding.localizedDescription)
+        }
     }
 
     func didCatchError(_ error: Error) {

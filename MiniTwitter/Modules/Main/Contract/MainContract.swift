@@ -11,20 +11,25 @@ import UIKit
 
 // MARK: View Output (Presenter -> View)
 protocol PresenterToViewMainProtocol: AnyObject {
-
+    func getSearchString() -> String
+    func setSearchString(with searchString: String)
+    func reloadTableViewData()
 }
 
 
 // MARK: View Input (View -> Presenter)
 protocol ViewToPresenterMainProtocol: AnyObject {
     var dataSource:PresenterToDataSourceMainProtocol? { get }
+
+    func didTapReturn(from searchText: String)
     func viewDidLoad()
 }
 
 
 // MARK: Interactor Input (Presenter -> Interactor)
 protocol PresenterToInteractorMainProtocol: AnyObject {
-
+    func getRecentTweets(with substring: String, number: Int)
+    func getImage(for url: String, comlition: @escaping (UIImage?) -> Void)
 }
 
 // MARK: Presenter Output (Presenter -> Router)

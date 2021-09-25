@@ -16,7 +16,8 @@ enum MainAssembly{
         let viewController = MainViewController()
         let router = MainRouter(view: viewController)
         let apiTwitterService = APITwitterService()
-        let interactor = MainInteractor(apiTwitterService: apiTwitterService)
+        let imageCashingService = ImageCashingService()
+        let interactor = MainInteractor(apiTwitterService: apiTwitterService, imageCashingService: imageCashingService)
         let dataSource = MainPresenterDataSource()
         let presenter = MainPresenter(view: viewController, interactor: interactor, router: router, dataSource: dataSource)
 
