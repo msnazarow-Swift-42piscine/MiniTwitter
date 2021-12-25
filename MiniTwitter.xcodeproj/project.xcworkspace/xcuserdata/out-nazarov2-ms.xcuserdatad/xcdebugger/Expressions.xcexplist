@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "TwitterCell.layoutSubviews():TwitterCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tweetLabel.frame.height">
+            </PersistentString>
+            <PersistentString
+               value = "profileImage.layer.bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "APITwitterService.makeRequest():APITwitterService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "urlComponents.url!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CellModel.init(_:):CellModel.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in APITwitterService.getRecentTweets(with:number:complition:):APITwitterService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "JSONSerialization.jsonObject(with: data)">
+            </PersistentString>
+            <PersistentString
+               value = "tweets[0].createdAt">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainPresenterDataSource.updateForSections(_:):MainPresenterDataSource.swift">
+      </ContextState>
+      <ContextState
+         contextName = "TwitterCell.updateConstraints():TwitterCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tweetLabel.frame.height">
+            </PersistentString>
+            <PersistentString
+               value = "tweetLabel.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in APITwitterService.makeRequest():APITwitterService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "request">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainPresenterDataSource.numberOfSections(in:):MainPresenterDataSource.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
